@@ -1,12 +1,12 @@
 let toggleDialogue = document.getElementById("toggleDialogue");
-let openDialogue = document.getElementById("openDialogue")
+let Dialogue = document.getElementById("Dialogue")
 let closeDialogue = document.getElementById("openDialogue")
 
 //Show Dialogue
 toggleDialogue.addEventListener("click", function(){
-    openDialogue.showModal();
+    Dialogue.showModal();
 })
 // Close Dialogue
 closeDialogue.addEventListener("click", function(){
-    closeDialogue.close();
+    Dialogue.close();
 } )
