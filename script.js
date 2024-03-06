@@ -9,4 +9,11 @@ toggleDialogue.addEventListener("click", function(){
 // Close Dialogue
 closeDialogue.addEventListener("click", function(){
     Dialogue.close();
-} )
+})
+
+//Defining form fields
+let title = document.getElementById("title");
+let author = document.getElementById("author");
+let pages = document.getElementById("pages");
+let read = document.getElementById("read");
+
