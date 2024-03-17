@@ -6,10 +6,14 @@
     <title>Document</title>
 </head>
 <body>
+    <nav>
+        <h2>Library</h2>
+        <a href="">Sign In</a>
+    </nav>
     <button id = "toggleDialogue">Click here</button>
     <dialog id = "Dialogue">
         <button id = "closeDialogue">Close Button</button>
-        <form action="" method="dialog">
+        <form id = "bookForm" method="dialog">
             <div>
                 <label for="title">Title</label>
                 <input type="text" name="title" id="title" required>
@@ -20,7 +24,7 @@
             </div>
             <div>
                 <label for="pages">Number of pages read</label>
-                <input type="number" name="pages" id="pages" required>
+                <input type="number" name="pages" id="pages" min="0">
             </div>
             <div>
                 <label for="read">Have you read the book</label>
@@ -32,14 +36,16 @@
             <button type="submit" id = "submit">Save</button>
         </form>        
     </dialog>
-    <div class = "card">
-        <div class="titleValue"></div>
-        <div class="authorValue"></div>
-        <div class="pagesValue"></div>
-        <div class="readValue"></div>
-        <div class="renameValue"></div>
-        <div class="deleteValue"></div>
-    </div>
+    <main>
+        <div class = "card">
+            <div class="titleValue"></div>
+            <div class="authorValue"></div>
+            <div class="pagesValue"></div>
+            <div class="readValue"></div>
+            <button class="renameValue" style="display: none;"></div>
+            <button class="deleteValue" style="display: none;"></div>
+        </div>
+    </main>  
     <script src="script.js"></script>
 </body>
 </html>
