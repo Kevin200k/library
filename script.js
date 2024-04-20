@@ -19,7 +19,8 @@ closeForm.addEventListener("click", hideDialog);
 const myLibrary = [];
 
 class Book{
-    constructor(title, author, read, pages){
+    constructor(id, title, author, read, pages){
+        this.id = id;
         this.title = title;
         this.author = author;
         this.read = read;
