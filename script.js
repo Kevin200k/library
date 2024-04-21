@@ -2,6 +2,11 @@
 let dialogForm = document.getElementById("form_dialog");
 let closeForm = document.getElementById("close_button");
 let addBook = document.getElementById("add_book");
+let userTitle = document.getElementById("user_title");
+let userAuthor = document.getElementById("user_author");
+let userPages = document.getElementById("user_pages");
+let userRead = document.getElementById("user_read");
+let submitButton = document.getElementById("submitForm");
 
 //Functions to show and hide dialog
 let showDialog = () => {
