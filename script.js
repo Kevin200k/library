@@ -24,6 +24,7 @@ let hideDialog = () => {
 
 //Event listeners to show and hide dialog form
 addBook.addEventListener("click", () => {
+    clearDialogue()
     showDialog()
     submitButton2.style.display =  "none";
     submitButton1.style.display =  "inline-block";
@@ -46,8 +47,15 @@ class Book{
         this.pages = pages;
     }
 }
+//Function to clear dialogue
+function clearDialogue(){
+    titleField.value = "";
+    authorField.value = "";
+    readField.checked = false;
+    pagesField.value = "";
+}
 //Function to add books to library array
-function addBookToLibrary() {
+function addBookToLibrary(){
     let book = new Book(i, titleField.value, authorField.value, readField.value, pagesField.value);
     myLibrary.push(book);
     //Creates a new card for each book in the library
@@ -88,7 +96,6 @@ function createCard(books, index){
         let currentBookContainer = document.getElementById(`bookContainer${index}`)
         main.removeChild(currentBookContainer);
         myLibrary[index] = "deleted";
-        console.log(myLibrary)
     });
     // Add event listener for the rename button of each card
     renameButton.addEventListener("click", () => {
@@ -111,7 +118,6 @@ function createCard(books, index){
             myLibrary[index].author = authorField.value;
             myLibrary[index].read = readField.checked ? "Read" : "Not Read";
             myLibrary[index].pages = pagesField.value;
-            console.log(myLibrary)
 
             let titleValue = document.getElementById(`title_field_${index}`);
             titleValue.textContent = titleField.value;
