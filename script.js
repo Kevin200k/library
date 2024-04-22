@@ -1,4 +1,5 @@
 // DOM Elements
+let main = document.querySelector("main");
 let dialogForm = document.getElementById("form_dialog");
 let closeForm = document.getElementById("close_button");
 let addBook = document.getElementById("add_book");
@@ -50,7 +51,28 @@ function addBookToLibrary() {
 }
 //Function to create a new card
 function createCard(books){
+    let bookContainer = document.createElement("div");
+    let renameButton = document.createElement("button");
+    renameButton.classList.add = "rename";
+    renameButton.textContent = "Rename";
+
+    let deleteButton = document.createElement("button");
+    deleteButton.classList.add = "delete";
+    deleteButton.textContent = "Delete";
+
+    let buttonFields = document.createElement("div");
+    buttonFields.classList.add = "button_fields";
+
+    buttonFields.appendChild(renameButton);
+    buttonFields.appendChild(deleteButton);
+
     for(let key in books){
         console.log(books[key])
+        let bookInfo = document.createElement("div");
+        bookInfo.textContent = books[key];
+        bookInfo.classList.add(`${key}_field`);
+        bookContainer.appendChild(bookInfo);
     }
+    bookContainer.appendChild(buttonFields)
+    main.appendChild(bookContainer);
 }
