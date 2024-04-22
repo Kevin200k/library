@@ -46,16 +46,16 @@ function addBookToLibrary() {
     myLibrary.push(book);
     console.log(myLibrary);
     //Creates a new card for each book in the library
-    createCard(book)
+    createCard(book, i)
     i++
 }
 //Function to create a new card
-function createCard(books){
+function createCard(books, index){
     let bookContainer = document.createElement("div");
     let renameButton = document.createElement("button");
     renameButton.classList.add = "rename";
     renameButton.textContent = "Rename";
-
+    
     let deleteButton = document.createElement("button");
     deleteButton.classList.add = "delete";
     deleteButton.textContent = "Delete";
@@ -75,4 +75,11 @@ function createCard(books){
     }
     bookContainer.appendChild(buttonFields)
     main.appendChild(bookContainer);
+
+    deleteButton.addEventListener("click", () => {
+        console.log(index)
+        bookContainer.style.display = "none";
+        myLibrary.splice(index, 1)
+        console.log(myLibrary)
+    })
 }
