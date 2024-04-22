@@ -83,12 +83,14 @@ function createCard(books, index){
     bookContainer.appendChild(buttonFields)
     main.appendChild(bookContainer);
 
+    // Add event listener fot he delete button of each card
     deleteButton.addEventListener("click", () => {
         let currentBookContainer = document.getElementById(`bookContainer${index}`)
         main.removeChild(currentBookContainer);
         myLibrary[index] = "deleted";
         console.log(myLibrary)
     });
+    // Add event listener for the rename button of each card
     renameButton.addEventListener("click", () => {
         submitButton2.style.display =  "inline-block";
         submitButton1.style.display =  "none";
@@ -103,7 +105,7 @@ function createCard(books, index){
         }
         pagesField.value = myLibrary[index].pages;
         dialogForm.showModal();
-        
+
         submitButton2.addEventListener("click", () => {
             myLibrary[index].title = titleField.value;
             myLibrary[index].author = authorField.value;
@@ -122,3 +124,4 @@ function createCard(books, index){
     })
 })
 }
+
