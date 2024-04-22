@@ -2,12 +2,14 @@
 let dialogForm = document.getElementById("form_dialog");
 let closeForm = document.getElementById("close_button");
 let addBook = document.getElementById("add_book");
-let userTitle = document.getElementById("user_title");
-let userAuthor = document.getElementById("user_author");
-let userPages = document.getElementById("user_pages");
-let userRead = document.getElementById("user_read");
+let titleField = document.getElementById("user_title");
+let authorField = document.getElementById("user_author");
+let pagesField = document.getElementById("user_pages");
+let readField = document.getElementById("user_read");
 let submitButton = document.getElementById("submitForm");
 
+// Id number
+let i = 0;
 //Functions to show and hide dialog
 let showDialog = () => {
     dialogForm.showModal()
@@ -21,17 +23,34 @@ let hideDialog = () => {
 addBook.addEventListener("click", showDialog);
 closeForm.addEventListener("click", hideDialog);
 
+//Event listener to submit form
+submitButton.addEventListener("click", addBookToLibrary);
+
+//Array to store books
 const myLibrary = [];
 
+// Book class
 class Book{
     constructor(id, title, author, read, pages){
         this.id = id;
         this.title = title;
         this.author = author;
-        this.read = read;
+        this.read = read.checked ? "Read" : "Not Read";
         this.pages = pages;
     }
 }
+//Function to add books to library array
 function addBookToLibrary() {
-  // do stuff here
+    let book = new Book(i, titleField.value, authorField.value, readField.value, pagesField.value);
+    myLibrary.push(book);
+    console.log(myLibrary);
+    //Creates a new card for each book in the library
+    createCard(book)
+    i++
+}
+//Function to create a new card
+function createCard(books){
+    for(let key in books){
+        console.log(books[key])
+    }
 }

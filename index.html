@@ -9,7 +9,7 @@
     <button id="add_book">Add Book</button>
     <dialog id= "form_dialog">
         <button id="close_button"><img src="./icons8-close.svg" alt="close_icon"></button>
-        <form>
+        <form method = "dialog">
             <div>
                 <label for="user_title">Title</label>
                 <input type="text" id = "user_title" required>
@@ -20,11 +20,11 @@
             </div>
             <div>
                 <label for="user_pages">Pages</label>
-                <input type="number" min="0" required>
+                <input type="number" min="0" required id = "user_pages">
             </div>
             <div>
                 <label for="user_read">Read</label>
-                <input type="checkbox">
+                <input type="checkbox" id = "user_read">
             </div>
             <button type="submit" id = "submitForm">Submit</button>
         </form>
