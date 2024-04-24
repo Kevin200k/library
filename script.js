@@ -12,6 +12,7 @@ let submitButton2 = document.getElementById("submitForm2");
 let searchBar = document.getElementById("searchbar");
 let searchButton = document.getElementById("searchButton");
 let searchResult = document.getElementById("searchResult");
+let cancelSearch = document.getElementById("cancelSearch");
 // Id numbers
 let i = 0;
 
@@ -39,9 +40,10 @@ submitButton1.addEventListener("click", () => {
 });
 
 //Event listener for the searchbutton
-searchButton.addEventListener("click", () => {
-    search()
-})
+searchButton.addEventListener("click", search);
+
+//Event listener for the cancelSearch Button
+cancelSearch.addEventListener("click", clearSearch)
 //Array to store books
 const myLibrary = [];
 
@@ -49,6 +51,10 @@ const myLibrary = [];
 let searchArray = [];
 
 // Arrays to store all ids present
+let idArray = [];
+
+// Arrays to store non corresponding ids
+let nonCorrespondingValues = []
 // Book class
 class Book{
     constructor(id, title, author, read, pages){
@@ -161,7 +167,6 @@ function search(){
     idArray = []
     searchArray = []
     let searchItem = searchBar.value;
-    console.log(searchItem)
     for(let book of myLibrary){
         let found = false;
         idArray.push(book.id)
@@ -176,12 +181,23 @@ function search(){
             searchArray.push(book.id)
         }
     }
-    let nonCorrespondingValues = idArray.filter(value => !searchArray.includes(value));
+    nonCorrespondingValues = idArray.filter(value => !searchArray.includes(value));
     for(let val of nonCorrespondingValues){
         console.log(val)
         let card = document.getElementById(`bookContainer${val}`);
         card.style.display = "none";
     }
     if(searchArray.length === 0) searchResult.innerText = "No search result found";
+    cancelSearch.style.display ="block";
+    searchButton.disabled = "true";
+}
+function clearSearch(){
+    searchResult.style.display = "none";
+    for(let id of nonCorrespondingValues){
+        let card = document.getElementById(`bookContainer${id}`);
+        card.style.display = "block";
+    }
+    cancelSearch.style.display ="none";
+    searchButton.disabled = "false";
 
 }
