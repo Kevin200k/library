@@ -9,7 +9,9 @@ let pagesField = document.getElementById("user_pages");
 let readField = document.getElementById("user_read");
 let submitButton1 = document.getElementById("submitForm1");
 let submitButton2 = document.getElementById("submitForm2");
-
+let searchBar = document.getElementById("searchbar");
+let searchButton = document.getElementById("searchButton");
+let searchResult = document.getElementById("searchResult");
 // Id numbers
 let i = 0;
 
@@ -32,11 +34,21 @@ addBook.addEventListener("click", () => {
 closeForm.addEventListener("click", hideDialog);
 
 //Event listener to submit form
-submitButton1.addEventListener("click", addBookToLibrary);
+submitButton1.addEventListener("click", () => {
+    if(titleField.value && authorField.value && pagesField.value) addBookToLibrary()
+});
 
+//Event listener for the searchbutton
+searchButton.addEventListener("click", () => {
+    search()
+})
 //Array to store books
 const myLibrary = [];
 
+// Array to store search values
+let searchArray = [];
+
+// Arrays to store all ids present
 // Book class
 class Book{
     constructor(id, title, author, read, pages){
@@ -56,8 +68,9 @@ function clearDialogue(){
 }
 //Function to add books to library array
 function addBookToLibrary(){
-    let book = new Book(i, titleField.value, authorField.value, readField.value, pagesField.value);
+    let book = new Book(i, titleField.value, authorField.value, readField, pagesField.value);
     myLibrary.push(book);
+    console.log(book)
     //Creates a new card for each book in the library
     createCard(book, i)
     i++
@@ -119,15 +132,56 @@ function createCard(books, index){
             myLibrary[index].read = readField.checked ? "Read" : "Not Read";
             myLibrary[index].pages = pagesField.value;
 
-            let titleValue = document.getElementById(`title_field_${index}`);
-            titleValue.textContent = titleField.value;
-            let authorValue = document.getElementById(`author_field_${index}`);
-            authorValue.textContent = authorField.value;
-            let readValue = document.getElementById(`read_field_${index}`);
-            readValue.textContent = readField.checked ? "Read" : "Not Read";
-            let pagesValue = document.getElementById(`pages_field_${index}`);
-            pagesValue.textContent = pagesField.value;
+            if(titleField.value && authorField.value && pagesField.value){
+                let titleValue = document.getElementById(`title_field_${index}`);
+                titleValue.textContent = titleField.value;
+                let authorValue = document.getElementById(`author_field_${index}`);
+                authorValue.textContent = authorField.value;
+                let readValue = document.getElementById(`read_field_${index}`);
+                readValue.textContent = readField.checked ? "Read" : "Not Read";
+                let pagesValue = document.getElementById(`pages_field_${index}`);
+                pagesValue.textContent = pagesField.value;
+            }
     })
 })
 }
 
+function checkCard(){
+    if(!titleField.value || !authorField.value || !pagesField.value){
+        submitButton1.disabled = true;
+        submitButton2.disabled = true;
+    }
+    else{
+        submitButton1.disabled = false;
+        submitButton2.disabled = false;
+    }
+}
+
+function search(){
+    idArray = []
+    searchArray = []
+    let searchItem = searchBar.value;
+    console.log(searchItem)
+    for(let book of myLibrary){
+        let found = false;
+        idArray.push(book.id)
+        for(let key in book){
+            let regEx = new RegExp(`([a-z]|[0-9])*${searchItem}([a-z]|[0-9])*`, 'i');
+            if(regEx.test(book[key])){
+                found = true;
+                break
+            }           
+        }
+        if(found){
+            searchArray.push(book.id)
+        }
+    }
+    let nonCorrespondingValues = idArray.filter(value => !searchArray.includes(value));
+    for(let val of nonCorrespondingValues){
+        console.log(val)
+        let card = document.getElementById(`bookContainer${val}`);
+        card.style.display = "none";
+    }
+    if(searchArray.length === 0) searchResult.innerText = "No search result found";
+
+}
