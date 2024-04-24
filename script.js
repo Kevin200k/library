@@ -189,7 +189,7 @@ function search(){
     }
     if(searchArray.length === 0) searchResult.innerText = "No search result found";
     cancelSearch.style.display ="block";
-    searchButton.disabled = "true";
+    searchButton.disabled = true;
 }
 function clearSearch(){
     searchResult.style.display = "none";
@@ -197,7 +197,8 @@ function clearSearch(){
         let card = document.getElementById(`bookContainer${id}`);
         card.style.display = "block";
     }
+    searchButton.disabled = false;
+    searchBar.value = "";
     cancelSearch.style.display ="none";
-    searchButton.disabled = "false";
 
 }
