@@ -13,6 +13,8 @@ let searchBar = document.getElementById("searchbar");
 let searchButton = document.getElementById("searchButton");
 let searchResult = document.getElementById("searchResult");
 let cancelSearch = document.getElementById("cancelSearch");
+let sort = document.getElementById("sort");
+
 // Id numbers
 let i = 0;
 
@@ -36,6 +38,7 @@ closeForm.addEventListener("click", hideDialog);
 
 //Event listener to submit form
 submitButton1.addEventListener("click", () => {
+    console.log(sort.selectedIndex)
     if(titleField.value && authorField.value && pagesField.value) addBookToLibrary()
 });
 
@@ -43,7 +46,10 @@ submitButton1.addEventListener("click", () => {
 searchButton.addEventListener("click", search);
 
 //Event listener for the cancelSearch Button
-cancelSearch.addEventListener("click", clearSearch)
+cancelSearch.addEventListener("click", clearSearch);
+
+//Event listener for the sort functionality
+sort.addEventListener("change", sortCards);
 //Array to store books
 const myLibrary = [];
 
@@ -200,5 +206,32 @@ function clearSearch(){
     searchButton.disabled = false;
     searchBar.value = "";
     cancelSearch.style.display ="none";
-
 }
+
+function sortCards(){
+    let selectedOption = sort.options[sort.selectedIndex];
+    let selectedOptionValue = selectedOption.value;
+    let titleArray = [];
+    let pagesArray = [];
+    
+    // Step 1: Populate titleArray and pagesArray
+    myLibrary.forEach(book => {
+        titleArray.push({ title: book.title.toLowerCase(), id: book.id });
+        pagesArray.push({ pages: book.pages, id: book.id });
+    });
+    
+    // Step 2: Sort arrays
+    let ascendingTitleArray = titleArray.slice().sort((a, b) => a.title.localeCompare(b.title));
+    let descendingTitleArray = titleArray.slice().sort((a, b) => b.title.localeCompare(a.title));
+    let ascendingPagesArray = pagesArray.slice().sort((a, b) => a.pages - b.pages);
+    let descendingPagesArray = pagesArray.slice().sort((a, b) => b.pages - a.pages);
+
+    // Step 3: Extract IDs from sorted arrays
+    let ascendingTitleId = ascendingTitleArray.map(book => book.id);
+    let descendingTitleId = descendingTitleArray.map(book => book.id);
+    let ascendingPagesId = ascendingPagesArray.map(book => book.id);
+    let descendingPagesId = descendingPagesArray.map(book => book.id);
+
+    // if(selectedOptionValue === "Ascending"){
+    //     titleArray.reverse()
+    }

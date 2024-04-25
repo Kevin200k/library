@@ -64,7 +64,7 @@ legend{
     font-size: 14px;
 }
 
-  label:not(.input_container:last-of-type label){
+.input_container label:not(.input_container:last-of-type label){
     position: absolute;
     top: -7px;
     left: 10px;
@@ -114,4 +114,8 @@ nav{
 }
 #cancelSearch{
     display: none;
+}
+main{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
 }
